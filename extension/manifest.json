@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Voss Scroll",
+  "version": "0.8.1",
+  "description": "边刷小红书、抖音边聊天的狐狸侧栏。通过本机 Codex 使用你自己的 ChatGPT 订阅，能看笔记图片和评论，会记住你。",
+  "permissions": [
+    "nativeMessaging",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "host_permissions": [
+    "https://*.douyin.com/*",
+    "https://*.xiaohongshu.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.douyin.com/*",
+        "https://*.xiaohongshu.com/*"
+      ],
+      "js": [
+        "core.js",
+        "sites/douyin.js",
+        "sites/xiaohongshu.js",
+        "panel.js",
+        "content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

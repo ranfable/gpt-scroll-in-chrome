@@ -1,0 +1,455 @@
+#voss-scroll-panel {
+  all: initial;
+  /* Muted rose palette. Adjust the shade here; every rule below uses these. */
+  --vs-bg: #f7eff0;
+  --vs-surface: #efe3e5;
+  --vs-bubble: #fdf9f9;
+  --vs-user: #e7d1d5;
+  --vs-border: #e3d2d5;
+  --vs-text: #3d2f33;
+  --vs-muted: #75626a;
+  --vs-accent: #b3848d;
+  --vs-accent-strong: #835560;
+  --vs-accent-soft: #ecdcdf;
+  --vs-switch-off: #947981;
+  --vs-error: #9a4750;
+  --vs-shadow: rgba(92, 58, 66, .18);
+  --vs-accent-hover: #714650;
+
+  position: fixed;
+  right: 18px;
+  top: 90px;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 108px);
+  max-height: calc(100dvh - 108px);
+  z-index: 2147483647;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI", sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--vs-text);
+  background: var(--vs-bg);
+  border: 1px solid var(--vs-border);
+  border-radius: 20px;
+  box-shadow: 0 18px 50px var(--vs-shadow);
+  overflow: hidden;
+  color-scheme: light;
+}
+#voss-scroll-panel[data-theme="blue"] {
+  --vs-bg: #eef2f6; --vs-surface: #e2e8ef; --vs-bubble: #f9fbfd; --vs-user: #d3dde8; --vs-border: #d6dee7;
+  --vs-text: #2e3640; --vs-muted: #5b6774; --vs-accent: #8499b0; --vs-accent-strong: #4c6379; --vs-accent-soft: #dce4ed;
+  --vs-switch-off: #758290; --vs-shadow: rgba(46, 58, 72, .18); --vs-accent-hover: #3d5163;
+}
+#voss-scroll-panel[data-theme="green"] {
+  --vs-bg: #f0f4ef; --vs-surface: #e4ebe2; --vs-bubble: #fafcf9; --vs-user: #d5e0d2; --vs-border: #d8e1d5;
+  --vs-text: #2f3a2f; --vs-muted: #5c695c; --vs-accent: #8aa287; --vs-accent-strong: #4d664c; --vs-accent-soft: #dde7da;
+  --vs-switch-off: #768674; --vs-shadow: rgba(47, 62, 47, .18); --vs-accent-hover: #3e533d;
+}
+#voss-scroll-panel[data-theme="orange"] {
+  --vs-bg: #f8f1eb; --vs-surface: #f0e5db; --vs-bubble: #fdfaf7; --vs-user: #ead7c7; --vs-border: #e6d6c8;
+  --vs-text: #3e3129; --vs-muted: #716053; --vs-accent: #c09274; --vs-accent-strong: #85573a; --vs-accent-soft: #efe0d3;
+  --vs-switch-off: #968070; --vs-shadow: rgba(80, 56, 38, .18); --vs-accent-hover: #6f482f;
+}
+#voss-scroll-panel.vs-with-chat {
+  width: 360px;
+  height: calc(100vh - 108px);
+  height: calc(100dvh - 108px);
+}
+#voss-scroll-panel.vs-with-chat.vs-collapsed { height: auto; }
+#voss-scroll-panel *,
+#voss-scroll-panel *::before,
+#voss-scroll-panel *::after { box-sizing: border-box; }
+#voss-scroll-panel [hidden] { display: none !important; }
+#voss-scroll-panel button {
+  appearance: none;
+  margin: 0;
+  font: inherit;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+}
+#voss-scroll-panel button:disabled { opacity: .5; cursor: default; }
+#voss-scroll-panel button:focus-visible,
+#voss-scroll-panel a:focus-visible,
+#voss-scroll-panel select:focus-visible,
+#voss-scroll-panel summary:focus-visible,
+#voss-scroll-panel textarea:focus-visible {
+  outline: 2px solid var(--vs-accent);
+  outline-offset: 2px;
+}
+
+/* Header */
+#voss-scroll-panel .vs-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 12px 12px 10px 14px;
+  border-bottom: 1px solid var(--vs-border);
+}
+#voss-scroll-panel .vs-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+#voss-scroll-panel .vs-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+#voss-scroll-panel .vs-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--vs-accent-soft);
+  font-size: 18px;
+}
+#voss-scroll-panel .vs-title { font-weight: 700; font-size: 15px; }
+#voss-scroll-panel .vs-sub {
+  color: var(--vs-muted);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#voss-scroll-panel .vs-head-actions { display: flex; gap: 6px; flex: 0 0 auto; }
+#voss-scroll-panel .vs-icon-button {
+  border: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  color: var(--vs-muted);
+  background: transparent;
+  font-size: 15px;
+}
+#voss-scroll-panel .vs-icon-button:hover,
+#voss-scroll-panel .vs-icon-button.active { background: var(--vs-accent-soft); color: var(--vs-text); }
+
+/* Body */
+#voss-scroll-panel .vs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 10px 12px 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+#voss-scroll-panel.vs-with-chat .vs-body { overflow: hidden; }
+#voss-scroll-panel .vs-small { font-size: 11px; color: var(--vs-muted); }
+
+/* Settings drawer */
+#voss-scroll-panel .vs-settings {
+  flex: 0 0 auto;
+  height: 55%;
+  min-height: 240px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 10px;
+  border-radius: 14px;
+  background: var(--vs-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#voss-scroll-panel .vs-field { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; }
+#voss-scroll-panel .vs-field-top { align-items: flex-start; }
+#voss-scroll-panel .vs-section-title {
+  margin: 6px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--vs-border);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--vs-accent-strong);
+}
+#voss-scroll-panel .vs-section-title:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+#voss-scroll-panel .vs-settings:not([hidden]) ~ #vs-chat-log { min-height: 64px; }
+#voss-scroll-panel .vs-swatches { display: flex; gap: 8px; }
+#voss-scroll-panel .vs-swatch {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 2px solid var(--vs-bubble);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--vs-border);
+}
+#voss-scroll-panel .vs-swatch[data-theme="rose"] { background: #835560; }
+#voss-scroll-panel .vs-swatch[data-theme="blue"] { background: #4c6379; }
+#voss-scroll-panel .vs-swatch[data-theme="green"] { background: #4d664c; }
+#voss-scroll-panel .vs-swatch[data-theme="orange"] { background: #85573a; }
+#voss-scroll-panel .vs-swatch[aria-checked="true"] { box-shadow: 0 0 0 2px var(--vs-text); }
+/* Sites may reset <input>; every property the field needs is set here. */
+#voss-scroll-panel .vs-text-input {
+  appearance: none;
+  display: block;
+  box-sizing: border-box;
+  width: 150px;
+  height: 28px;
+  margin: 0;
+  padding: 4px 8px;
+  font: inherit;
+  font-size: 12px;
+  color: var(--vs-text);
+  background: var(--vs-bubble);
+  border: 1px solid var(--vs-border);
+  border-radius: 8px;
+  outline: none;
+}
+#voss-scroll-panel .vs-text-input:focus-visible { outline: 2px solid var(--vs-accent); outline-offset: 1px; }
+#voss-scroll-panel .vs-avatar-picker { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+#voss-scroll-panel .vs-emoji-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; max-width: 190px; }
+#voss-scroll-panel .vs-emoji {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 1;
+}
+#voss-scroll-panel .vs-emoji:hover { background: var(--vs-accent-soft); }
+#voss-scroll-panel .vs-emoji[aria-pressed="true"] { background: var(--vs-bubble); border-color: var(--vs-accent-strong); }
+#voss-scroll-panel select {
+  font: inherit;
+  font-size: 12px;
+  color: var(--vs-text);
+  background: var(--vs-bubble);
+  border: 1px solid var(--vs-border);
+  border-radius: 8px;
+  padding: 5px 7px;
+  min-width: 0;
+  max-width: 190px;
+}
+#voss-scroll-panel .vs-soft-button {
+  border: 1px solid var(--vs-border);
+  border-radius: 8px;
+  padding: 5px 9px;
+  font-size: 12px;
+  color: var(--vs-text);
+  background: var(--vs-bubble);
+}
+#voss-scroll-panel .vs-soft-button:hover { background: var(--vs-accent-soft); }
+#voss-scroll-panel .vs-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; }
+#voss-scroll-panel .vs-toggle-text { cursor: pointer; }
+#voss-scroll-panel .vs-toggle-text small { display: block; margin-top: 1px; }
+#voss-scroll-panel .vs-switch {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--vs-switch-off);
+  transition: background-color .15s ease;
+}
+#voss-scroll-panel .vs-switch[aria-checked="true"] { background: var(--vs-accent-strong); }
+#voss-scroll-panel .vs-switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(61, 47, 51, .3);
+  transition: transform .15s ease;
+}
+#voss-scroll-panel .vs-switch[aria-checked="true"] .vs-switch-knob { transform: translateX(16px); }
+@media (prefers-reduced-motion: reduce) {
+  #voss-scroll-panel .vs-switch, #voss-scroll-panel .vs-switch-knob { transition: none; }
+}
+#voss-scroll-panel .vs-chat-toolbar { display: flex; gap: 6px; }
+#voss-scroll-panel .vs-chat-toolbar select { flex: 1 1 auto; }
+#voss-scroll-panel .vs-memory { font-size: 12px; }
+#voss-scroll-panel .vs-memory summary { cursor: pointer; color: var(--vs-accent-strong); }
+#voss-scroll-panel .vs-memory p { margin: 6px 0; }
+#voss-scroll-panel #vs-memory-input { min-height: 120px; max-height: 240px; margin: 6px 0; }
+#voss-scroll-panel .vs-remembered-list { list-style: none; margin: 4px 0 0; padding: 0; max-height: 200px; overflow-y: auto; overscroll-behavior: contain; }
+#voss-scroll-panel .vs-remembered-list li { display: flex; align-items: flex-start; gap: 6px; padding: 5px 2px; border-top: 1px solid var(--vs-border); }
+#voss-scroll-panel .vs-remembered-list li:first-child { border-top: 0; }
+#voss-scroll-panel .vs-remembered-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; color: var(--vs-text); }
+#voss-scroll-panel .vs-remembered-remove { flex: 0 0 auto; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--vs-muted); font-size: 15px; line-height: 1; }
+#voss-scroll-panel .vs-remembered-remove:hover:not(:disabled) { background: var(--vs-accent-soft); color: var(--vs-text); }
+
+/* Current note */
+#voss-scroll-panel .vs-card {
+  flex: 0 0 auto;
+  background: var(--vs-surface);
+  border-radius: 14px;
+  padding: 8px 10px;
+  overflow-wrap: anywhere;
+}
+#voss-scroll-panel .vs-context-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  list-style: none;
+}
+#voss-scroll-panel .vs-context-summary::-webkit-details-marker { display: none; }
+#voss-scroll-panel .vs-context-summary::after { content: "▾"; margin-left: auto; color: var(--vs-muted); }
+#voss-scroll-panel .vs-card[open] .vs-context-summary::after { content: "▴"; }
+#voss-scroll-panel .vs-image-count { flex: 0 0 auto; color: var(--vs-accent-strong); font-size: 11px; }
+#voss-scroll-panel .vs-context-label { flex: 0 0 auto; color: var(--vs-accent-strong); font-weight: 600; }
+#voss-scroll-panel #vs-context-title {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#voss-scroll-panel #vs-status { font-size: 12px; color: var(--vs-muted); margin-top: 6px; }
+#voss-scroll-panel #vs-current { font-size: 13px; margin-top: 6px; }
+#voss-scroll-panel #vs-content-title { font-weight: 600; white-space: pre-wrap; }
+#voss-scroll-panel #vs-author { color: var(--vs-muted); font-size: 12px; margin-top: 4px; }
+#voss-scroll-panel #vs-description {
+  white-space: pre-wrap;
+  margin-top: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+#voss-scroll-panel #vs-source,
+#voss-scroll-panel .vs-link-button {
+  display: inline-block;
+  margin: 8px 12px 0 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vs-accent-strong);
+  font-size: 12px;
+  text-decoration: none;
+}
+#voss-scroll-panel #vs-source:hover,
+#voss-scroll-panel .vs-link-button:hover { text-decoration: underline; }
+
+/* Chat */
+#voss-scroll-panel #vs-chat-log {
+  flex: 1 1 auto;
+  min-height: 120px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px 2px 4px;
+}
+#voss-scroll-panel .vs-message,
+#voss-scroll-panel .vs-pending {
+  max-width: 88%;
+  padding: 8px 11px;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#voss-scroll-panel .vs-assistant {
+  align-self: flex-start;
+  background: var(--vs-bubble);
+  border: 1px solid var(--vs-border);
+  border-bottom-left-radius: 4px;
+}
+#voss-scroll-panel .vs-user {
+  align-self: flex-end;
+  background: var(--vs-user);
+  border-bottom-right-radius: 4px;
+}
+#voss-scroll-panel .vs-speaker { margin-bottom: 2px; }
+#voss-scroll-panel .vs-image-tag { margin: 4px 0 0; text-align: right; }
+#voss-scroll-panel .vs-user .vs-speaker { text-align: right; }
+#voss-scroll-panel .vs-memory-note {
+  align-self: center;
+  max-width: 94%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--vs-accent-soft);
+  color: var(--vs-accent-strong);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+#voss-scroll-panel .vs-memory-note .vs-link-button { margin: 0 0 0 8px; font-size: 11px; }
+#voss-scroll-panel .vs-empty {
+  margin: auto 8px;
+  text-align: center;
+  color: var(--vs-muted);
+  font-size: 12px;
+}
+#voss-scroll-panel .vs-typing .vs-text { color: var(--vs-accent); font-weight: 700; letter-spacing: 2px; animation: vs-breathe 1.2s ease-in-out infinite; }
+@keyframes vs-breathe { 50% { opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { #voss-scroll-panel .vs-typing .vs-text { animation: none; } }
+
+#voss-scroll-panel .vs-comment {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: var(--vs-surface);
+  font-size: 12px;
+  color: var(--vs-muted);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#voss-scroll-panel .vs-comment[data-state="error"] { color: var(--vs-error); }
+
+/* Composer */
+#voss-scroll-panel #vs-compose { flex: 0 0 auto; display: flex; flex-direction: column; gap: 6px; }
+#voss-scroll-panel .vs-quick {
+  align-self: flex-start;
+  border: 1px solid var(--vs-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--vs-accent-strong);
+  background: var(--vs-bubble);
+}
+#voss-scroll-panel .vs-quick:hover:not(:disabled) { background: var(--vs-accent-soft); }
+#voss-scroll-panel .vs-compose-row { display: flex; align-items: flex-end; gap: 6px; }
+#voss-scroll-panel textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  line-height: 1.5;
+  color: var(--vs-text);
+  background: var(--vs-bubble);
+  border: 1px solid var(--vs-border);
+  border-radius: 12px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+#voss-scroll-panel textarea::placeholder { color: var(--vs-muted); opacity: .8; }
+#voss-scroll-panel #vs-input { min-height: 44px; max-height: 160px; resize: none; }
+#voss-scroll-panel #vs-send {
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 12px;
+  padding: 9px 14px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--vs-accent-strong);
+}
+#voss-scroll-panel #vs-send:hover { background: var(--vs-accent-hover); }
+#voss-scroll-panel #vs-send.vs-stop { color: var(--vs-accent-strong); background: var(--vs-accent-soft); }
+
+#voss-scroll-panel .vs-model-note {
+  text-align: center;
+  color: var(--vs-muted);
+  font-size: 11px;
+}
+
+@media (max-height: 500px), (max-width: 600px) {
+  #voss-scroll-panel,
+  #voss-scroll-panel.vs-with-chat {
+    top: 12px;
+    right: 12px;
+    max-height: calc(100vh - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+  #voss-scroll-panel.vs-with-chat { height: calc(100dvh - 24px); }
+}
