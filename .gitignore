@@ -1,0 +1,11 @@
+# Generated per machine by bridge/install-native-host.mjs (absolute paths, extension ID)
+bridge/launch-native-host
+bridge/com.voss.scroll.json
+
+# Local results from real-model tests
+bridge/smoke-result.json
+
+# Chat exports and OS files
+voss-chat*.json
+.DS_Store
+node_modules/

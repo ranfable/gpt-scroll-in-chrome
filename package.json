@@ -1,0 +1,13 @@
+{
+  "name": "voss-scroll",
+  "version": "0.8.1",
+  "private": true,
+  "description": "A fox companion sidebar for Xiaohongshu and Douyin in Chrome, powered by your own ChatGPT subscription through the local Codex app.",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node bridge/check-connection.mjs",
+    "install-host": "node bridge/install-native-host.mjs"
+  }
+}
