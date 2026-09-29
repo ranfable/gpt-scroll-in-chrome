@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>Voss 浏览器回归测试 — 运行中</title>
+<link rel="stylesheet" href="../extension/style.css">
+<style>
+body{font:15px/1.6 system-ui;background:#f6f4f1;margin:24px;color:#222} h1{font-size:24px} #results{width:calc(100% - 380px);min-width:350px;font-size:13px;white-space:pre-wrap} #fixture{position:fixed;left:24px;bottom:16px;width:calc(100% - 400px);height:270px;overflow:hidden;background:white;border:1px solid #ddd;border-radius:16px} .note-container,[data-e2e="feed-item"]{position:absolute;inset:0;padding:12px;box-sizing:border-box;background:white} video{display:block;width:180px;height:100px;background:#222} .author-container,.author-wrapper{min-height:25px} [hidden]{display:none!important} #fixture .offscreen{transform:translateY(200vh)} #noise{position:absolute;left:-10000px}
+</style></head><body>
+<h1>Voss Scroll · 浏览器回归测试</h1><p>真实 Chrome DOM / MutationObserver / IntersectionObserver；使用人工夹具，不代表两个网站已实测。</p>
+<pre id="results">正在验证……</pre><div id="noise"></div><div id="fixture"></div>
+<script>
+// Test-only: ?assume-visible lets the suite run in a background tab. Voss itself pauses while hidden.
+if (new URLSearchParams(location.search).has('assume-visible')) Object.defineProperty(Document.prototype, 'hidden', { configurable: true, get: () => false });
+</script>
+<script src="../extension/core.js"></script><script src="../extension/sites/douyin.js"></script><script src="../extension/sites/xiaohongshu.js"></script><script src="../extension/panel.js"></script><script src="../extension/content.js"></script><script src="browser.js"></script>
+</body></html>

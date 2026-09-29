@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>Voss 聊天与记忆离线测试 — 运行中</title>
+<link rel="stylesheet" href="../extension/style.css">
+<style>
+body{font:15px/1.6 system-ui;background:#f6f4f1;margin:24px;color:#222}h1{font-size:24px}#results{width:calc(100% - 380px);min-width:320px;font-size:13px;white-space:pre-wrap}#fixture{position:fixed;left:24px;bottom:16px;width:calc(100% - 400px);height:200px;overflow:hidden;background:white;border:1px solid #ddd;border-radius:16px}.note-container{position:absolute;inset:0;padding:12px;box-sizing:border-box;background:white}.author-container{min-height:25px}
+/* Mirrors xiaohongshu.com's global reset, which draws every input at 0x0. */
+input{-webkit-appearance:none;appearance:none;width:0;height:0;border:0;padding:0;margin:0}
+</style></head><body>
+<h1>Voss Scroll · 聊天与记忆离线测试</h1>
+<p>只使用人工笔记与假的扩展消息接口；不会联系本机服务或真实模型。</p>
+<pre id="results">正在验证……</pre><div id="fixture"></div>
+<script>
+// Test-only: ?assume-visible lets the suite run in a background tab. Voss itself pauses while hidden.
+if (new URLSearchParams(location.search).has('assume-visible')) Object.defineProperty(Document.prototype, 'hidden', { configurable: true, get: () => false });
+</script>
+<script src="../extension/core.js"></script><script src="../extension/sites/douyin.js"></script><script src="../extension/sites/xiaohongshu.js"></script><script src="../extension/panel.js"></script><script src="../extension/content.js"></script><script src="chat-browser.js"></script>
+</body></html>
